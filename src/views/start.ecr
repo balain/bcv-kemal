@@ -1,0 +1,200 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+<script> function clearForm() {
+        document.getElementById("trans").selectedIndex = 2;
+        document.getElementById("searchTerm").value="";
+        document.getElementById("searchTerm").focus();
+        document.getElementById("searchTerm").select();
+}
+
+function onChange(e) {
+	console.log(e);
+	location.href=e;
+}
+</script>
+<H1>Book List</H1>
+<!-- Search form -->
+<form class="row gy-0 gx-2 align-items-center" method="get" action="/search" >
+    <div class="col-auto">
+        <input type='text' id='searchTerm' name='search_term' length=20 placeholder='search string' value='' class='form-control form-control-sm'></input>
+    </div>
+    <div class="col-auto"><!-- select -->
+        <select name='trans' id='trans' class='form-select form-select-sm' aria-label='Select translation/language'><option value='heb' >Hebrew</option><option value='morph' >Greek</option><option value='eng' selected>Eng</option></select>
+    </div>
+    <div class="col-auto"><!-- submit -->
+        <input class='btn btn-outline-success btn-sm' type='submit'  value='go'></input>
+        <button class='btn btn-outline-info btn-sm' type='reset' onclick="clearForm(); return false;" style="float: right !important;">Clear</button>
+    </div>
+    <div class="col-auto"><!-- jump to book -->
+		<select class="form-select" id="OTselect" onchange="onChange(this.value)">
+			<option value=''>OT</option>
+			<option value='/books/Gen.html'>Genesis</option>
+			<option value='/books/Exo.html'>Exodus</option>
+			<option value='/books/Lev.html'>Leviticus</option>
+			<option value='/books/Num.html'>Numbers</option>
+			<option value='/books/Deu.html'>Deuteronomy</option>
+			<option value='/books/Jos.html'>Joshua</option>
+			<option value='/books/Jdg.html'>Judges</option>
+			<option value='/books/Rut.html'>Ruth</option>
+			<option value='/books/1Sa.html'>1st Samuel</option>
+			<option value='/books/2Sa.html'>2nd Samuel</option>
+			<option value='/books/1Ki.html'>1st Kings</option>
+			<option value='/books/2Ki.html'>2nd Kings</option>
+			<option value='/books/1Ch.html'>1st Chronicles</option>
+			<option value='/books/2Ch.html'>2nd Chronicles</option>
+			<option value='/books/Ezr.html'>Ezra</option>
+			<option value='/books/Neh.html'>Nehemiah</option>
+			<option value='/books/Est.html'>Esther</option>
+			<option value='/books/Job.html'>Job</option>
+			<option value='/books/Psa.html'>Psalms</option>
+			<option value='/books/Pro.html'>Proverbs</option>
+			<option value='/books/Ecc.html'>Ecclesiastes</option>
+			<option value='/books/Sol.html'>Song of Solomon</option>
+			<option value='/books/Isa.html'>Isaiah</option>
+			<option value='/books/Jer.html'>Jeremiah</option>
+			<option value='/books/Lam.html'>Lamentations</option>
+			<option value='/books/Eze.html'>Ezekiel</option>
+			<option value='/books/Dan.html'>Daniel</option>
+			<option value='/books/Hos.html'>Hosea</option>
+			<option value='/books/Joe.html'>Joel</option>
+			<option value='/books/Amo.html'>Amos</option>
+			<option value='/books/Oba.html'>Obadiah</option>
+			<option value='/books/Jon.html'>Jonah</option>
+			<option value='/books/Mic.html'>Micah</option>
+			<option value='/books/Nah.html'>Nahum</option>
+			<option value='/books/Hab.html'>Habakkuk</option>
+			<option value='/books/Zep.html'>Zephaniah</option>
+			<option value='/books/Hag.html'>Haggai</option>
+			<option value='/books/Zec.html'>Zechariah</option>
+			<option value='/books/Mal.html'>Malachi</option>
+        </select>
+    </div>
+    <div class="col-auto"><!-- jump to book -->
+		<select class="form-select" id="NTselect" onchange="onChange(this.value)">
+			<option value=''>NT</option>
+			<option value='/books/Mat.html'>Matthew</option>
+			<option value='/books/Mar.html'>Mark</option>
+			<option value='/books/Luk.html'>Luke</option>
+			<option value='/books/Joh.html'>John</option>
+			<option value='/books/Act.html'>Acts</option>
+			<option value='/books/Rom.html'>Romans</option>
+			<option value='/books/1Co.html'>1st Corinthians</option>
+			<option value='/books/2Co.html'>2nd Corinthians</option>
+			<option value='/books/Gal.html'>Galatians</option>
+			<option value='/books/Eph.html'>Ephesians</option>
+			<option value='/books/Phi.html'>Philippians</option>
+			<option value='/books/Col.html'>Colossians</option>
+			<option value='/books/1Th.html'>1st Thessalonians</option>
+			<option value='/books/2Th.html'>2nd Thessalonians</option>
+			<option value='/books/1Ti.html'>1st Timothy</option>
+			<option value='/books/2Ti.html'>2nd Timothy</option>
+			<option value='/books/Tit.html'>Titus</option>
+			<option value='/books/Phm.html'>Philemon</option>
+			<option value='/books/Heb.html'>Hebrews</option>
+			<option value='/books/Jam.html'>James</option>
+			<option value='/books/1Pe.html'>1st Peter</option>
+			<option value='/books/2Pe.html'>2nd Peter</option>
+			<option value='/books/1Jo.html'>1st John</option>
+			<option value='/books/2Jo.html'>2nd John</option>
+			<option value='/books/3Jo.html'>3rd John</option>
+			<option value='/books/Jud.html'>Jude</option>
+			<option value='/books/Rev.html'>Revelation</option>
+		</select>
+    </div>
+</form>
+
+<div class="cotainer">
+	<div class='row row-cols-5 g-0 gy-0 align-items-start'>
+		<div class='col'>
+			<div class="list-group">
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Gen.html'>Gen</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Exo.html'>Exo</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Lev.html'>Lev</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Num.html'>Nums</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Deu.html'>Deut</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Jos.html'>Josh</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Jdg.html'>Judg</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Rut.html'>Ruth</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/1Sa.html'>1Sam</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/2Sa.html'>2Sam</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/1Ki.html'>1Ki</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/2Ki.html'>2Ki</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/1Ch.html'>1Chr</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/2Ch.html'>2Chr</a>
+			</div>
+		</div>
+		<div class='col'>
+			<div class="list-group">
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Ezr.html'>Ezra</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Neh.html'>Neh</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Est.html'>Est</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Job.html'>Job</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Psa.html'>Psa</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Pro.html'>Prov</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Ecc.html'>Eccl</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Sol.html'>Sol</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Isa.html'>Isa</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Jer.html'>Jer</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Lam.html'>Lam</a>
+			</div>
+		</div>
+		<div class='col'>
+			<div class="list-group">
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Eze.html'>Eze</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Dan.html'>Dan</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Hos.html'>Hos</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Joe.html'>Joel</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Amo.html'>Amos</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Oba.html'>Oba</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Jon.html'>Jon</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Mic.html'>Mic</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Nah.html'>Nah</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Hab.html'>Hab</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Zep.html'>Zeph</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Hag.html'>Hag</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Zec.html'>Zech</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Mal.html'>Mal</a>
+			</div>
+		</div>
+		<div class='col'>
+			<div class="list-group">
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Mat.html'>Matt</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Mar.html'>Mark</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Luk.html'>Luke</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Joh.html'>John</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Act.html'>Acts</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Rom.html'>Rom</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/1Co.html'>1Cor</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/2Co.html'>2Cor</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Gal.html'>Gal</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Eph.html'>Eph</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Phi.html'>Phil</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Col.html'>Col</a>
+			</div>
+		</div>
+		<div class='col'>
+			<div class="list-group">
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/1Th.html'>1Th</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/2Th.html'>2Th</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/1Ti.html'>1Tim</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/2Ti.html'>2Tim</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Tit.html'>Tit</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Phm.html'>Phmn</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Heb.html'>Heb</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Jam.html'>Jam</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/1Pe.html'>1Pet</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/2Pe.html'>2Pet</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/1Jo.html'>1Jn</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/2Jo.html'>2Jn</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/3Jo.html'>3Jn</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Jud.html'>Jude</a>
+				<a class='display-7 list-group-item list-group-item-action list-group-item-info' href='/books/Rev.html'>Rev</a>
+			</div>
+		</div>
+	</div>
+</div>

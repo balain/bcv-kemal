@@ -1,0 +1,328 @@
+
+<!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
+    <script>
+      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) { return new bootstrap.Popover(popoverTriggerEl) })
+    </script>
+    <title>BCV <%= term %> [DEV]</title>
+    <style>
+        a { text-decoration: none; color: black; }
+
+        .previous {
+            font-size: small;
+            color: darkcyan;
+            text-decoration: none;
+        }
+
+        .gk-verse {
+          background: #eee;
+          padding-left: .5rem;
+          display: block;
+        }
+
+        .eng-verse { padding-left: .5rem; }
+
+        .search-hit {
+          background: yellow;
+        }
+
+        .hist {
+          text-decoration: none;
+          background: yellow;
+        }
+
+        body { padding: .5rem; }
+        .gnt-defn { background: #c8d5ff; font-size: smaller; }
+        .bkstats { width: 3.5%; background: blue; display: inline-block; }
+        .bkstatsname { width: 3.5%; padding: 2px; text-align: center; display: inline-block; font-size: xx-small; vertical-align: top; }
+        .gospel { background: green; }
+        .apoc { background: red; }
+        .letter { background: blue; }
+        .hebrews { background: orange; }
+        .none { display: none; }
+        .verse-eng { }
+        .verse-gnt {
+          background-color: aliceblue;
+        }
+
+        .clean-line { }
+
+        .chpHit {
+          text-align: center;
+        }
+        .chpHitTR {
+          text-align: center;
+          bold: true;
+        }
+
+        .hover-content {
+          padding: 10px;
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+          box-sizing: border-box;
+          background-color: #fff;
+          width: 240px;
+        }
+
+        [data-hover-wrapper] {
+          transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .hover-content > img {
+          max-width: 100%;
+          margin-bottom: 10px;
+        }
+
+        .hover-content > p {
+          font-size: 14px;
+          margin: 0;
+          line-height: 1.4;
+        }
+
+        .info {
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          background-color: #000;
+          padding: 10px 20px;
+          color: #fff;
+          font-size: 13px;
+        }
+
+        #chart-wrapper {
+          width: 100%;
+          display: inline-block;
+          position: relative;
+        }
+
+        #myBtn {
+            position: fixed;
+            bottom: 10px;
+            float: right;
+            right: 12%;
+            left: 88%;
+            max-width: 30px;
+            width: 100%;
+            font-size: 12px;
+            border-color: rgba(85, 85, 85, 0.2);
+            background-color: rgb(100,100,100);
+            padding: .5px;
+            border-radius: 4px;
+            text-decoration: none;
+
+        }
+          /*On Hover Color Change*/
+          #myBtn:hover {
+              background-color: #7dbbf1;
+          }
+
+        .cookie-link {
+          padding-left: 5px;
+        }
+
+        .clear-btn {
+            padding: 0px 2px 0px 2px;
+            font-size: x-small;
+        }
+
+        .jumps {
+            background-color: aliceblue;
+        }
+
+        #book-jumps {
+            position: fixed;
+            bottom: 10px;
+            border-color: rgba(85, 85, 150);
+            background-color: rgb(100,250,250);
+            padding: 0px 5px 0px 5px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: small;
+            width: 85%;
+        }
+
+        .bottom-buffer {
+            padding: 50px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .bottom-buffer {
+                padding: 100px;
+                }
+        }
+
+        .mode-dev {
+            height: 25px;
+            float: right;
+            right: 5%;
+            left: 95%;
+            background-color: #faa;
+            display: inline-block;
+            position: fixed;
+            bottom: 5px;
+            padding: 0px 5px 0px 5px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: small;
+            width: 20px;
+        }
+
+        .mode-prod {
+            height: 25px;
+            float: right;
+            right: 5%;
+            left: 95%;
+            background-color: #aaf;
+            display: inline-block;
+            position: fixed;
+            bottom: 5px;
+            padding: 0px 5px 0px 5px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: small;
+            width: 20px;
+        }
+
+        @media print {
+          #chart-wrapper {
+            width: 100%;
+          }
+        }
+      </style>
+	<script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
+      </head>
+      <body>
+        <!-- Script to clear the search form -->
+        <script> function clearForm() {
+                document.getElementById("trans").selectedIndex = 2;
+                document.getElementById("searchTerm").value="";
+                document.getElementById("searchTerm").focus();
+                document.getElementById("searchTerm").select();
+        }
+        </script>
+        <!-- popup libraries -->
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+        <!-- back to top button -->
+        <button id="myBtn"><a href="#top" style="color: white; text - decoration: none;">Top</a></button>
+        <!-- Search form -->
+        <form class="row gy-0 gx-2 align-items-center" method="get" action="/search" >
+            <div class="col-auto">
+                <input type='text' id='searchTerm' name='search_term' length=20 placeholder='search string' value='' class='form-control form-control-sm'></input>
+            </div>
+            <div class="col-auto"><!-- select -->
+                <select name='trans' id='trans' class='form-select form-select-sm' aria-label='Select translation/language'><option value='heb' >Hebrew</option><option value='morph' >Greek</option><option value='eng' selected>Eng</option></select>
+            </div>
+            <div class="col-auto"><!-- submit -->
+                <input class='btn btn-outline-success btn-sm' type='submit'  value='go'></input>
+                <button class='btn btn-outline-info btn-sm' type='reset' onclick="clearForm(); return false;" style="float: right !important;">Clear</button>
+
+            </div><span><span class='mode-dev'></span></span>
+        </form>
+
+                      <div id="plotlyChart"></div>
+<H1>Hebrew search for <em><%= term %></em></H1>
+    <p>~ <%= result_count %> hits</p>
+    <div><%= search_history.get_links() %></div>
+    <%= results %>
+
+      <script>
+        tippy('#en-tippy', {
+            theme: 'light',
+            content: 'Loading...',
+            onShow(instance) {
+                const word = instance.reference.attributes.word.value;
+                fetch("/quick-search/" + word).then((response) => response.text())
+                    .then((content) => {
+                        instance.setContent(content);
+                    })
+                    .catch((error) => {
+                        instance.setContent('Request failed: ' + error);
+                    })
+            },
+            onHidden(instance) {
+                instance.setContent('Loading...');
+            }, allowHTML: true, placement: 'auto', maxWidth: '600px', interactive: true, delay: [1000, null], performance: true, touchHold: true,
+        })
+
+        tippy('#gk-tippy', {
+            theme: 'light',
+            content: 'Loading...',
+            onShow(instance) {
+                const word = instance.reference.attributes.word.value;
+                const syn = instance.reference.attributes.syn.value;
+                fetch("/strongs/" + word + "/" + syn).then((response) => response.text())
+                    .then((content) => {
+                        instance.setContent(content);
+                    })
+                    .catch((error) => {
+                        instance.setContent('Request failed: ' + error);
+                    })
+            },
+            onHidden(instance) {
+                instance.setContent('Loading...');
+            }, allowHTML: true, placement: 'auto', maxWidth: '600px', interactive: true, delay: [1000, null], performance: true, touchHold: true,
+        })
+        tippy('#heb-tippy', {
+            theme: 'light',
+            content: 'Loading...',
+            onShow(instance) {
+                const word = instance.reference.attributes.word.value;
+                const syn = instance.reference.attributes.syn.value;
+                fetch("/strongs-heb/" + word).then((response) => response.text())
+                    .then((content) => {
+                        instance.setContent(content);
+                    })
+                    .catch((error) => {
+                        instance.setContent('Request failed: ' + error);
+                    })
+            },
+            onHidden(instance) {
+                instance.setContent('Loading...');
+            }, allowHTML: true, placement: 'auto', maxWidth: '600px', interactive: true, delay: [1000, null], performance: true, touchHold: true,
+        })
+      </script>
+      <script>
+        var ctr = {
+          x: [<%= chart_book_array %>],
+          y: <%= chart.get_hits %>,
+          name: '#',
+          type: 'bar'
+        };
+        
+        var perc = {
+          x: [<%= chart_book_array %>],
+          y: <%= chart.get_percents %>,
+          name: 'perc',
+          type: 'line',   yaxis: 'y2',
+        };
+        
+        var data = [ctr, perc];
+        
+        var layout = { 
+          autosize: true,
+          margin: {
+             autoexpand: true, b: 40, t:5, l:25, r:0, pad: 0, },
+          height: 150,
+          showlegend: false,
+          yaxis: {
+          },
+          yaxis2: {
+            minallowed: 0,
+            overlaying: 'y',
+            side: 'right', minimum: 0, 
+          }
+        };
+        
+        Plotly.newPlot('plotlyChart', data, layout, { responsive: true, displaylogo: false });
+        </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script></body></html><div class='bottom-buffer'></div>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+name: bcv-kemal
+version: 0.1.0
+
+authors:
+  - John <balain@users.noreply.github.com>
+
+targets:
+  bcv-kemal:
+    main: src/bcv-kemal.cr
+
+dependencies:
+  kemal:
+    github: "kemalcr/kemal"
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
+  dotenv:
+    github: drum445/dotenv
+
+crystal: '>= 1.15.0'
+
+license: MIT

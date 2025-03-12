@@ -1,0 +1,16 @@
+<html>
+
+<body>
+    <p><a href="/search/gk/<%= term %>" style='color: white; text-decoration: none;'>Search for <%= term %><% if pos && pos != "undef" %> (<%= pos %>) | <a href="/search/gk/<%= term %>/<%= pos %>" style='color: white; text-decoration: none;'>Search with POS</a><% end %></p>
+    <p>~ <%= result_count %> hits</p>
+    <ul>
+    <li>Word: <%= term %>
+    <li>Strong's Defn: <%= strongs_def %>
+    <li>KJV Defn: <%= kjv_def %>
+    <li>Lemma: <%= lemma %>
+    <li>Translit: <%= xlit %>
+    <li>Derivation: <%= derivation %>
+    </ul>
+</body>
+
+</html>
