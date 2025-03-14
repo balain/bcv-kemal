@@ -51,6 +51,7 @@ Built using Crystal (programming language), Kemal (web framework), SQLite (datab
 
 ## TODO
 
+- [ ] Change SQL to parameterized queries
 - [ ] Document database schema
 - [ ] Document .env fields
 - [ ] Document content ETL
@@ -77,6 +78,13 @@ Built using Crystal (programming language), Kemal (web framework), SQLite (datab
 
 #### Format
 - https://github.com/biblenerd/awesome-bible-developer-resources?tab=readme-ov-file#usfx
+
+## Warnings and Notices
+
+- SQL injection is possible with this code - queries are not parameterized!
+- Kemal server is http, not https
+- There is no support for separate users or authentication - e.g. query history is shared across all clients
+- Content: Abide by all copyrights and other content restrictions
 
 ## Development
 
