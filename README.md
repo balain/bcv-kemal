@@ -81,7 +81,7 @@ Built using Crystal (programming language), Kemal (web framework), SQLite (datab
 
 ## Warnings and Notices
 
-- SQL injection is possible with this code - queries are not parameterized!
+- Queries are parameterized - avoids SQL injection
 - Kemal server is http, not https
 - There is no support for separate users or authentication - e.g. query history is shared across all clients
 - Content: Abide by all copyrights and other content restrictions
