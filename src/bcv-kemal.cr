@@ -242,7 +242,7 @@ get "/search/en/:word/:book" do |env|
 
       # Append the new results to the results array - full div contents
       # TODO: Make styling configurable (or from .env)
-      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='background-color: aliceblue; display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
+      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
       results = "changed to array"
     end
 
@@ -354,7 +354,7 @@ get "/search/gk/:word" do |env|
       # Find the root and replace the final word
       gk = highlight_greek_by_lemma(term, gk.to_s)
 
-      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a>\n<span class='verse-eng'>#{content}</span>\n<span style='background-color: aliceblue; display: block; padding: 0 1em 0 2em;'><!-- start gk -->#{gk}<!-- /gk --></span></div>"
+      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a>\n<span class='verse-eng'>#{content}</span>\n<span style='display: block; padding: 0 1em 0 2em;'><!-- start gk -->#{gk}<!-- /gk --></span></div>"
     end
 
     if result_count_full == result_count
@@ -455,7 +455,7 @@ get "/search/gk/:word/:pos" do |env|
       # Find the root and replace the final word
       gk = highlight_greek_by_lemma(term, gk.to_s)
 
-      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='background-color: aliceblue; display: block; padding: 0 1em 0 2em;'>#{gk}</span></div>"
+      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{gk}</span></div>"
     end
 
     if result_count_full == result_count
@@ -578,7 +578,7 @@ get "/search/heb/:word" do |env|
         end
       end
 
-      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='background-color: aliceblue; display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
+      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
     end
 
     if result_count_full == result_count
@@ -771,7 +771,7 @@ get "/and/:id1/:id2" do |env|
       gk = highlight_greek_by_lemma(search_history.@search_results[id1].@word, gk.to_s)
       gk = highlight_greek_by_lemma(search_history.@search_results[id2].@word, gk)
       
-      results = "#{results}<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='background-color: aliceblue; display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
+      results = "#{results}<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
     end
 
     set_chart_type(env, chart)
@@ -845,7 +845,7 @@ get "/not/:id1/:id2" do |env|
       gk = highlight_greek_by_lemma(search_history.@search_results[id1].@word, gk.to_s)
       gk = highlight_greek_by_lemma(search_history.@search_results[id2].@word, gk)
       
-      results = "#{results}<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='background-color: aliceblue; display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
+      results = "#{results}<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
     end
 
     set_chart_type(env, chart)
@@ -921,7 +921,7 @@ get "/intersect/:id1/:id2" do |env|
       gk = highlight_greek_by_lemma(search_history.@search_results[id1].@word, gk.to_s)
       gk = highlight_greek_by_lemma(search_history.@search_results[id2].@word, gk)
 
-      results = "#{results}<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='background-color: aliceblue; display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
+      results = "#{results}<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
     end
 
     set_chart_type(env, chart)
