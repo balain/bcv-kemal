@@ -125,6 +125,69 @@ get "/search/en/:word" do |env|
   env.redirect "/search/en/#{env.params.url["word"]}/all"
 end
 
+# Display a single verse
+get "/verse/:book/:chapter/:verse" do |env|
+  sql = "select Book,Chapter,Verse,VerseNum,Content from `" + ENV["BASE_ENG_TRANS"] + "_verses` where book=? and chapter=? and verse=?"
+  result_book = "UNDEF"
+  result_chapter = -1
+  result_verse = -1
+  result_content = "UNDEF"
+  # Log.info { "SQL: #{sql}" }
+
+  db.query sql, "#{env.params.url["book"]}", "#{env.params.url["chapter"]}", "#{env.params.url["verse"]}" do |resultset|
+    resultset.each do
+      result_book = resultset.read(String)
+      result_chapter = resultset.read(Int32)
+      result_verse = resultset.read(Int32)
+      result_verse_num = resultset.read(Int32)
+      result_content = resultset.read(String)
+
+      # Log.info { "Result Content: #{result_content}" }
+
+    end
+    
+    # Log.info { "Result Content: #{result_content}" }
+
+    # Display the content
+    env.response.status_code = 200
+    env.response.content_type = "text/html; charset=utf-8"
+    if result_book == "UNDEF"
+      env.response.status_code = 404
+    end
+    result_book + " " + result_chapter.to_s + ":" + result_verse.to_s + " - " + result_content
+  end
+end
+
+# Display a range of verses (limited to same book and chapter)
+get "/verses/:book/:chapter/:verse_start/:verse_end" do |env|
+  sql = "select Book,Chapter,Verse,VerseNum,Content from `" + ENV["BASE_ENG_TRANS"] + "_verses` where book=? and chapter=? and verse >= ? and verse <= ?"
+  result_book = "UNDEF"
+  result_chapter = -1
+  result_verse_start = env.params.url["verse_start"]
+  result_verse_end = env.params.url["verse_end"]
+  result_content = ""
+
+  Log.info { "SQL: #{sql}" }
+
+  db.query sql, "#{env.params.url["book"]}", "#{env.params.url["chapter"]}", "#{env.params.url["verse_start"]}", "#{env.params.url["verse_end"]}" do |resultset|
+    resultset.each do
+      result_book = resultset.read(String)
+      result_chapter = resultset.read(Int32)
+      result_verse = resultset.read(Int32)
+      result_verse_num = resultset.read(Int32)
+      result_content += resultset.read(String)
+    end
+    # Display the content
+    env.response.status_code = 200
+    env.response.content_type = "text/html; charset=utf-8"
+    if result_book == "UNDEF"
+      env.response.status_code = 404
+    end
+    result_book + " " + result_chapter.to_s + ":" + result_verse_start.to_s + "-" + result_verse_end.to_s + " - " + result_content
+  end
+end
+
+# Search across all books
 get "/search/en/:word/:book" do |env|
   Log.info { "/search/en/#{env.params.url["word"]}/#{env.params.url["book"]} called..." }
   results_array = [] of String
