@@ -16,3 +16,6 @@ bcv-kemal
 /public/books
 
 .DS_Store
+
+# Images in the public folder
+public/*.png

@@ -120,6 +120,10 @@ def highlight_english_word(word, eng)
   eng
 end
 
+def build_ol_ggl_tippy_span(bk, chp, vs)
+  "<span class='context-popup' id='cxt-ol-tippy' bcv='#{bk} #{chp}-#{vs}'><img src='#{ENV["CXT_OL_ICON"]}' style='vertical-align:text-top; padding-left: 5px; padding-right: 5px;'></span><span class='context-popup' id='cxt-ggl-tippy' bcv='#{bk} #{chp}-#{vs}'><img src='#{ENV["CXT_GGL_ICON"]}' style='vertical-align:text-top; padding-left: 5px; padding-right: 5px;'></span>"
+end
+
 # Placeholder - default to searching across all books
 get "/search/en/:word" do |env|
   env.redirect "/search/en/#{env.params.url["word"]}/all"
@@ -305,7 +309,7 @@ get "/search/en/:word/:book" do |env|
 
       # Append the new results to the results array - full div contents
       # TODO: Make styling configurable (or from .env)
-      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> &lt;&nbsp;<span class='context-popup' id='cxt-ol-tippy' bcv='#{bk} #{chp}-#{vs}'>O</span>&nbsp;|&nbsp;<span class='context-popup' id='cxt-ggl-tippy' bcv='#{bk} #{chp}-#{vs}'>G</span>&nbsp;&gt;<span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
+      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> #{build_ol_ggl_tippy_span(bk, chp, vs)} <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
       results = "changed to array"
     end
 
@@ -334,6 +338,9 @@ get "/search/en/:word/:book" do |env|
 
   env.response.status_code = 200
   env.response.content_type = "text/html; charset=utf-8"
+
+  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_URL"]
+  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_URL"]
 
   render "src/views/results.ecr"
 end
@@ -417,7 +424,7 @@ get "/search/gk/:word" do |env|
       # Find the root and replace the final word
       gk = highlight_greek_by_lemma(term, gk.to_s)
 
-      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a>\n<span class='verse-eng'>#{content}</span>\n<span style='display: block; padding: 0 1em 0 2em;'><!-- start gk -->#{gk}<!-- /gk --></span></div>"
+      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a>\n #{build_ol_ggl_tippy_span(bk, chp, vs)} <span class='verse-eng'>#{content}</span>\n<span style='display: block; padding: 0 1em 0 2em;'><!-- start gk -->#{gk}<!-- /gk --></span></div>"
     end
 
     if result_count_full == result_count
@@ -440,6 +447,9 @@ get "/search/gk/:word" do |env|
   # Render the page
   env.response.status_code = 200
   env.response.content_type = "text/html; charset=utf-8"
+
+  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_URL"]
+  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_URL"]
 
   render "src/views/results.ecr"
 end
@@ -518,7 +528,7 @@ get "/search/gk/:word/:pos" do |env|
       # Find the root and replace the final word
       gk = highlight_greek_by_lemma(term, gk.to_s)
 
-      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{gk}</span></div>"
+      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a>  #{build_ol_ggl_tippy_span(bk, chp, vs)} <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{gk}</span></div>"
     end
 
     if result_count_full == result_count
@@ -541,6 +551,9 @@ get "/search/gk/:word/:pos" do |env|
   # Render the page
   env.response.status_code = 200
   env.response.content_type = "text/html; charset=utf-8"
+
+  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_URL"]
+  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_URL"]
 
   render "src/views/results.ecr"
 end
@@ -641,7 +654,7 @@ get "/search/heb/:word" do |env|
         end
       end
 
-      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
+      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a>  #{build_ol_ggl_tippy_span(bk, chp, vs)} <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
     end
 
     if result_count_full == result_count
@@ -666,6 +679,10 @@ get "/search/heb/:word" do |env|
   # Render the page
   env.response.status_code = 200
   env.response.content_type = "text/html; charset=utf-8"
+
+  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_URL"]
+  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_URL"]
+
   render "src/views/results.ecr"
 end
 

@@ -403,7 +403,7 @@
             content: 'Loading Ollama context info...',
             onShow(instance) {
                 const word = instance.reference.attributes.bcv.value;
-                fetch("http://127.0.0.1:8000/ol/" + word).then((response) => response.text())
+                fetch("<%=cxt_ol_tippy_url%>" + word).then((response) => response.text())
                     .then((content) => {
                         instance.setContent(content);
                     })
@@ -420,7 +420,7 @@
             content: 'Loading Google context info...',
             onShow(instance) {
                 const word = instance.reference.attributes.bcv.value;
-                fetch("http://127.0.0.1:8000/ggl/" + word).then((response) => response.text())
+                fetch("<%=cxt_ggl_tippy_url%>" + word).then((response) => response.text())
                     .then((content) => {
                         instance.setContent(content);
                     })
