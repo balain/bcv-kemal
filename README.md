@@ -26,6 +26,7 @@ Built using Crystal (programming language), Kemal (web framework), SQLite (datab
 1. Install just - https://github.com/casey/just (optional)
 1. Install watchexec - XYZ (optional)
 1. Set up the database - instructions pending
+1. Install Bible context server - c.f. https://github.com/balain/bible-context-server 
 
 ## Dependencies
 
@@ -37,6 +38,7 @@ Built using Crystal (programming language), Kemal (web framework), SQLite (datab
 ### Optional
 - just
 - watchexec
+- local bible-context-server instance (localhost) - for contextual popups
 
 ## Usage
 

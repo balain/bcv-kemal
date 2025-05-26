@@ -167,7 +167,7 @@ get "/verses/:book/:chapter/:verse_start/:verse_end" do |env|
   result_verse_end = env.params.url["verse_end"]
   result_content = ""
 
-  Log.info { "SQL: #{sql}" }
+  # Log.info { "SQL: #{sql}" }
 
   db.query sql, "#{env.params.url["book"]}", "#{env.params.url["chapter"]}", "#{env.params.url["verse_start"]}", "#{env.params.url["verse_end"]}" do |resultset|
     resultset.each do
@@ -305,7 +305,7 @@ get "/search/en/:word/:book" do |env|
 
       # Append the new results to the results array - full div contents
       # TODO: Make styling configurable (or from .env)
-      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> <span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
+      results_array << "<div class='verse-eng' id='#{bk}-#{chp}-#{vs}'><a style='text-decoration: none;' href='/books/#{bk}.html##{chp}-#{vs}'>#{bk} #{chp}:#{vs}</a> &lt;&nbsp;<span class='context-popup' id='cxt-ol-tippy' bcv='#{bk} #{chp}-#{vs}'>O</span>&nbsp;|&nbsp;<span class='context-popup' id='cxt-ggl-tippy' bcv='#{bk} #{chp}-#{vs}'>G</span>&nbsp;&gt;<span class='verse-eng'>#{content}</span><span style='display: block; padding: 0 1em 0 2em;'>#{heb}#{gk}</span></div>"
       results = "changed to array"
     end
 
