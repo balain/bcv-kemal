@@ -42,6 +42,8 @@ Built using Crystal (programming language), Kemal (web framework), SQLite (datab
 
 ## Usage
 
+1. Set up .env file with sensible defaults, including Bible Context Server (see below for details)
+
 ### Debug - Run
 1. Run `just watch` (or `crystal run src/bcv-kemal.cr`)
 
@@ -50,6 +52,30 @@ Built using Crystal (programming language), Kemal (web framework), SQLite (datab
 
 ### Production - Build
 1. Run `just build-prod` (or `KEMAL_ENV=production crystal build src/bcv-kemal.cr -o bcv-kemal --release -O3`)
+
+## Configuration
+
+Set up a new `.env` file with sensible defaults
+
+### Keys
+
+- `DBFILE`: Path to SQLite database file
+- `BASE_ENG_TRANS`: Base English translation to use for full text search
+
+#### Bible Context Server
+##### Ollama
+- `CXT_OL_TIPPY_METHOD`: Method (http|https) of bible-context-server instance
+- `CXT_OL_TIPPY_PORT`: Port of local bible-context-server instance
+- `CXT_OL_TIPPY_PATH`: Path of local bible-context-server instance
+- `CXT_OL_ICON`: Icon to use for context popup
+
+##### Google Gemini
+- `CXT_GGL_TIPPY_METHOD`: Method (http|https) of bible-context-server instance
+- `CXT_GGL_TIPPY_PORT`: Port of local bible-context-server instance 
+- `CXT_GGL_TIPPY_PATH`: Path of local bible-context-server instance 
+- `CXT_GGL_ICON`: Icon to use for context popup
+
+See `.env-example` for details
 
 ## TODO
 

@@ -339,8 +339,10 @@ get "/search/en/:word/:book" do |env|
   env.response.status_code = 200
   env.response.content_type = "text/html; charset=utf-8"
 
-  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_URL"]
-  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_URL"]
+  # Assume all Tippy hosts are the same server as the app
+  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_METHOD"] + "://" + "#{env.request.hostname}" + ":" + ENV["CXT_OL_TIPPY_PORT"] + ENV["CXT_OL_TIPPY_PATH"]
+
+  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_METHOD"] + "://" + "#{env.request.hostname}" + ":" + ENV["CXT_GGL_TIPPY_PORT"] + ENV["CXT_GGL_TIPPY_PATH"]
 
   render "src/views/results.ecr"
 end
@@ -448,8 +450,10 @@ get "/search/gk/:word" do |env|
   env.response.status_code = 200
   env.response.content_type = "text/html; charset=utf-8"
 
-  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_URL"]
-  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_URL"]
+  # Assume all Tippy hosts are the same server as the app
+  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_METHOD"] + "://" + "#{env.request.hostname}" + ":" + ENV["CXT_OL_TIPPY_PORT"] + ENV["CXT_OL_TIPPY_PATH"]
+
+  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_METHOD"] + "://" + "#{env.request.hostname}" + ":" + ENV["CXT_GGL_TIPPY_PORT"] + ENV["CXT_GGL_TIPPY_PATH"]
 
   render "src/views/results.ecr"
 end
@@ -552,8 +556,10 @@ get "/search/gk/:word/:pos" do |env|
   env.response.status_code = 200
   env.response.content_type = "text/html; charset=utf-8"
 
-  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_URL"]
-  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_URL"]
+  # Assume all Tippy hosts are the same server as the app
+  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_METHOD"] + "://" + "#{env.request.hostname}" + ":" + ENV["CXT_OL_TIPPY_PORT"] + ENV["CXT_OL_TIPPY_PATH"]
+
+  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_METHOD"] + "://" + "#{env.request.hostname}" + ":" + ENV["CXT_GGL_TIPPY_PORT"] + ENV["CXT_GGL_TIPPY_PATH"]
 
   render "src/views/results.ecr"
 end
@@ -680,8 +686,10 @@ get "/search/heb/:word" do |env|
   env.response.status_code = 200
   env.response.content_type = "text/html; charset=utf-8"
 
-  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_URL"]
-  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_URL"]
+  # Assume all Tippy hosts are the same server as the app
+  cxt_ol_tippy_url = ENV["CXT_OL_TIPPY_METHOD"] + "://" + "#{env.request.hostname}" + ":" + ENV["CXT_OL_TIPPY_PORT"] + ENV["CXT_OL_TIPPY_PATH"]
+
+  cxt_ggl_tippy_url = ENV["CXT_GGL_TIPPY_METHOD"] + "://" + "#{env.request.hostname}" + ":" + ENV["CXT_GGL_TIPPY_PORT"] + ENV["CXT_GGL_TIPPY_PATH"]
 
   render "src/views/results.ecr"
 end
