@@ -35,6 +35,10 @@ Built using Crystal (programming language), Kemal (web framework), SQLite (datab
 - sqlite3
 - kemal
 
+- Local copies of D3 (http://d3js.org/d3.v4.min.js)and Dimple (http://dimplejs.org/dist/dimple.v2.3.0.min.js)
+  - Download and store in the bcv-kemal/public/js folder or update bcv_chart.cr to point to them by URL
+
+
 ### Optional
 - just
 - watchexec

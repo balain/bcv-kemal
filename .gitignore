@@ -19,3 +19,5 @@ bcv-kemal
 
 # Images in the public folder
 public/*.png
+public/js/d3.v4.min.js
+public/js/dimple.v2.3.0.min.js

@@ -29,6 +29,7 @@ book_filter = ""
 
 get "/" do |env|
   # Display search form + Bible navigation page
+  Log.info { "GET / called - from #{env.request.headers}..." }
   render "src/views/start.ecr"
 end
 

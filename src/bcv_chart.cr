@@ -172,7 +172,7 @@ class BcvChart
 
   def js_script_tag
     if @type == ChartType::Dimple
-      "<script src=\"http://d3js.org/d3.v4.min.js\"></script><script src=\"http://dimplejs.org/dist/dimple.v2.3.0.min.js\"></script>"
+      "<script src=\"/js/d3.v4.min.js\"></script><script src=\"/js/dimple.v2.3.0.min.js\"></script>"
     elsif @type == ChartType::Plotly
       "<script src=\"https://cdn.plot.ly/plotly-3.0.1.min.js\" charset=\"utf-8\"></script>"
     else
